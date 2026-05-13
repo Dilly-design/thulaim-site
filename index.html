@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ثُليم — ضيافة سعودية فاخرة | Premium Saudi Hospitality</title>
+<meta name="description" content="ثُليم — بيت ضيافة سعودي حديث. ولائم، بوفيهات مناسبات، ضيافة شركات، ضيافة رمضان. تجربة نجدية فاخرة بتنفيذ موثوق.">
+<link rel="canonical" href="https://thulaim.sa/">
+<meta property="og:title" content="ثُليم — ضيافة سعودية فاخرة">
+<meta property="og:description" content="بيت ضيافة سعودي حديث. ضيافة تُشرَّف، وتُبهر، وتُعبّر عنك.">
+<meta property="og:type" content="website">
+
+<style>
+  /* thmanyah Serif Display — للعناوين */
+  @font-face { font-family: 'TSD'; src: url('fonts/thmanyahserifdisplay-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'TSD'; src: url('fonts/thmanyahserifdisplay-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'TSD'; src: url('fonts/thmanyahserifdisplay-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'TSD'; src: url('fonts/thmanyahserifdisplay-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'TSD'; src: url('fonts/thmanyahserifdisplay-Black.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
+  /* thmanyah Serif Text — للنصوص والفقرات */
+  @font-face { font-family: 'TST'; src: url('fonts/thmanyahseriftext-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'TST'; src: url('fonts/thmanyahseriftext-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'TST'; src: url('fonts/thmanyahseriftext-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'TST'; src: url('fonts/thmanyahseriftext-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'TST'; src: url('fonts/thmanyahseriftext-Black.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
+  /* thmanyah Sans — للأزرار والـ UI */
+  @font-face { font-family: 'TSANS'; src: url('fonts/thmanyahsans-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'TSANS'; src: url('fonts/thmanyahsans-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'TSANS'; src: url('fonts/thmanyahsans-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'TSANS'; src: url('fonts/thmanyahsans-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'TSANS'; src: url('fonts/thmanyahsans-Black.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'TST', serif; direction: rtl; background: #f9f1e8; color: #2a2620; -webkit-font-smoothing: antialiased; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input, textarea, select { font-family: inherit; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: #a0373d; color: #f9f1e8; }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .section-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1);
+  }
+  .section-reveal.in-view {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="sections.jsx"></script>
+<script type="text/babel" src="booking.jsx"></script>
+<script type="text/babel" src="menu-builder.jsx"></script>
+<script type="text/babel" src="extra.jsx"></script>
+<script type="text/babel" src="blog.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+</body>
+</html>

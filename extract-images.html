@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>PDF Image Extractor</title></head>
+<body style="background:#111;color:#fff;font-family:sans-serif;padding:20px">
+<h2>PDF → Images</h2>
+<div id="status">Loading...</div>
+<div id="canvases"></div>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+
+const SCALE = 1.5;
+const PAGES_WITH_PHOTOS = [4, 5, 6, 7];
+const SAVE_SERVER = 'http://localhost:65510';
+
+async function run() {
+  const status = document.getElementById('status');
+  const container = document.getElementById('canvases');
+
+  status.textContent = 'Loading PDF...';
+  const pdf = await pdfjsLib.getDocument('assets/menu.pdf').promise;
+  status.textContent = `PDF loaded: ${pdf.numPages} pages. Rendering...`;
+
+  for (const pageNum of PAGES_WITH_PHOTOS) {
+    status.textContent = `Rendering page ${pageNum}...`;
+
+    const page = await pdf.getPage(pageNum);
+    const viewport = page.getViewport({ scale: SCALE });
+
+    const canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    canvas.style.cssText = 'max-width:100%;margin:10px 0;display:block;border:1px solid #444';
+
+    const ctx = canvas.getContext('2d');
+    await page.render({ canvasContext: ctx, viewport }).promise;
+
+    // Auto-save to server
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+    const filename = `page-${pageNum}.jpg`;
+    try {
+      const resp = await fetch(`${SAVE_SERVER}/save/${filename}`, { method: 'POST', body: dataUrl });
+      const msg = await resp.text();
+      status.textContent = `Saved page ${pageNum}: ${msg}`;
+    } catch(e) {
+      status.textContent = `Save failed page ${pageNum}: ${e.message}`;
+    }
+
+    const label = document.createElement('div');
+    label.style.color = '#c2a480';
+    label.style.marginTop = '16px';
+    label.textContent = `Page ${pageNum} ✓`;
+
+    const link = document.createElement('a');
+    link.textContent = `Download page-${pageNum}.jpg`;
+    link.style.cssText = 'display:inline-block;margin:8px 0;padding:8px 16px;background:#a0373d;color:#fff;text-decoration:none;font-size:14px';
+    link.href = dataUrl;
+    link.download = filename;
+
+    container.appendChild(label);
+    container.appendChild(link);
+    container.appendChild(canvas);
+  }
+
+  status.textContent = '✓ Done! All pages saved to assets/';
+}
+
+run().catch(e => document.getElementById('status').textContent = 'Error: ' + e.message);
+</script>
+</body>
+</html>
