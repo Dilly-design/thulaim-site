@@ -125,6 +125,25 @@ const YesNoField = ({ label, value, onChange }) => (
 const PriceBox = ({ guests, wantsSetup }) => {
   const n = arabicToNumber(guests);
   if (!n) return null;
+
+  /* +٦٠ → custom quote, no price shown */
+  if (guests === '+٦٠') {
+    return (
+      <div style={{ background: C.ink, borderRadius: 0, padding: '24px 20px', marginTop: 20 }}>
+        <div style={{ fontFamily: F.sans, fontSize: 10, fontWeight: 700,
+          color: 'rgba(194,164,128,.5)', letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 12 }}>
+          مناسبة كبرى — طلب عرض سعر
+        </div>
+        <div style={{ fontFamily: F.display, fontWeight: 700, fontSize: 20, color: C.beige, marginBottom: 10 }}>
+          سنُعدّ لك عرضاً مخصصاً
+        </div>
+        <p style={{ fontFamily: F.text, fontWeight: 300, fontSize: 13, color: 'rgba(218,200,179,.6)', lineHeight: 1.75, margin: 0 }}>
+          المناسبات فوق ٦٠ ضيف تحتاج تفاصيل أكثر. أكمل طلبك وسيتواصل معك فريق ثُليم خلال ٢٤ ساعة بعرض مناسب.
+        </p>
+      </div>
+    );
+  }
+
   const hosp     = n * PRICE_PER_PERSON;
   const setup    = wantsSetup ? n * SETUP_PER_PERSON : 0;
   const subtotal = hosp + setup;
@@ -339,6 +358,17 @@ const BookingModal = ({ open, onClose, prefill }) => {
       }`)
       .join('\n');
 
+    const isLarge = data.guests === '+٦٠';
+    const pricingLines = isLarge
+      ? ['—— التسعير ——', 'طلب عرض سعر مخصص (+٦٠ ضيف)']
+      : [
+          '—— التسعير التقديري ——',
+          `الضيافة: ${toArabicNum(hosp)} ر.س`,
+          ...(data.wantsSetup ? [`الإعداد: ${toArabicNum(setup)} ر.س`] : []),
+          `ضريبة (١٥٪): ${toArabicNum(vat)} ر.س`,
+          `الإجمالي: ${toArabicNum(total)} ر.س`,
+        ];
+
     const lines = [
       'السلام عليكم، أرغب في حجز ضيافة مع ثُليم 🌿',
       '',
@@ -353,11 +383,7 @@ const BookingModal = ({ open, onClose, prefill }) => {
       logisticsText || 'لم تُحدَّد',
       data.wantsSetup ? '✔ يحتاج إعداد وتجهيز (+٥٠ ر.س/ضيف)' : '✖ بدون إعداد',
       '',
-      '—— التسعير التقديري ——',
-      `الضيافة: ${toArabicNum(hosp)} ر.س`,
-      ...(data.wantsSetup ? [`الإعداد: ${toArabicNum(setup)} ر.س`] : []),
-      `ضريبة (١٥٪): ${toArabicNum(vat)} ر.س`,
-      `الإجمالي: ${toArabicNum(total)} ر.س`,
+      ...pricingLines,
       '',
       '—— بيانات التواصل ——',
       `الاسم: ${data.name}`,

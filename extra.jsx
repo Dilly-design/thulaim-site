@@ -44,19 +44,10 @@ const Story = () => {
             <blockquote style={{
               borderRight: `3px solid ${C.beige}`, paddingRight: 20,
               fontFamily: F.text, fontStyle: 'italic', fontWeight: 300,
-              fontSize: mobile ? 16 : 19, color: C.ink, lineHeight: 1.75, marginBottom: 36,
+              fontSize: mobile ? 16 : 19, color: C.ink, lineHeight: 1.75, marginBottom: 0,
             }}>
-              "ضيافة تُشرَّف، وتُبهر، وتُعبّر عنك."
+              "ضيافة تُشرَّف، وكرم يُروى."
             </blockquote>
-            <div style={{ display: 'flex', gap: mobile ? 24 : 48 }}>
-              {[{ n: '١٩٤٠', l: 'مضيف ثُليم' }, { n: '+١٥٠٠٠', l: 'ضيف يومياً' }, { n: 'اليوم', l: 'نكمل المسيرة' }].map((t, i) => (
-                <div key={i} style={{ borderTop: `1px solid ${C.border}`, paddingTop: 16 }}>
-                  <div style={{ fontFamily: F.display, fontWeight: 900, fontSize: mobile ? 18 : 22, color: C.burgundy, lineHeight: 1 }}>{t.n}</div>
-                  <div style={{ fontFamily: F.sans, fontSize: 9, fontWeight: 700,
-                    color: C.greenL, letterSpacing: '0.14em', textTransform: 'uppercase', marginTop: 6 }}>{t.l}</div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </Container>
