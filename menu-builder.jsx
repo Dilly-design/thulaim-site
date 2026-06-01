@@ -35,12 +35,12 @@ const MENU_CATS = [
 
 /* Recommended counts by guest group */
 const REC_TABLE = {
-  '٢٠': { starters: 2, salads: 3, mains: 4, sides: 2, pasta: 1, sweets: 3 },
-  '٣٠': { starters: 3, salads: 3, mains: 5, sides: 2, pasta: 1, sweets: 4 },
-  '٤٠': { starters: 3, salads: 4, mains: 6, sides: 2, pasta: 2, sweets: 4 },
-  '٥٠': { starters: 4, salads: 5, mains: 7, sides: 3, pasta: 2, sweets: 5 },
-  '٦٠': { starters: 5, salads: 5, mains: 8, sides: 3, pasta: 2, sweets: 5 },
-  '+٦٠':{ starters: 6, salads: 6, mains: 9, sides: 4, pasta: 3, sweets: 5 },
+  '٢٠': { starters: 2, salads: 3, mains: 4, sides: 0, pasta: 0, sweets: 3 },
+  '٣٠': { starters: 3, salads: 4, mains: 5, sides: 0, pasta: 0, sweets: 4 },
+  '٤٠': { starters: 3, salads: 4, mains: 6, sides: 0, pasta: 0, sweets: 4 },
+  '٥٠': { starters: 4, salads: 5, mains: 7, sides: 0, pasta: 0, sweets: 5 },
+  '٦٠': { starters: 4, salads: 5, mains: 8, sides: 0, pasta: 0, sweets: 5 },
+  '+٦٠':{ starters: 5, salads: 6, mains: 9, sides: 0, pasta: 0, sweets: 6 },
 };
 const CAT_KEYS = ['starters','salads','mains','sides','pasta','sweets'];
 
