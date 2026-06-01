@@ -3,45 +3,159 @@
 ══════════════════════════════ */
 const Nav = ({ onBook }) => {
   const [scrolled, setScrolled] = React.useState(false);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const desktop = !useIsMobile(900);
+
   React.useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 80);
     window.addEventListener('scroll', fn, { passive: true });
     return () => window.removeEventListener('scroll', fn);
   }, []);
+
+  /* منع تمرير الصفحة خلف القائمة */
+  React.useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
   const links = [
     { label: 'خدماتنا', id: 'services' },
-    { label: 'قصتنا', id: 'story' },
-    { label: 'أسئلة', id: 'faq' },
+    { label: 'قصتنا',   id: 'story'    },
+    { label: 'باقاتنا', id: 'packages' },
+    { label: 'أسئلة',   id: 'faq'      },
   ];
+
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setMenuOpen(false);
+  };
+
+  const light = (!scrolled && !menuOpen);
+  const navBg = menuOpen ? C.ink
+    : scrolled ? 'rgba(249,241,232,.95)'
+    : 'transparent';
+  const navBorder = menuOpen
+    ? '1px solid rgba(194,164,128,.08)'
+    : `1px solid ${scrolled ? C.border : 'transparent'}`;
+
+  /* ── شريط الهامبورغر: خطوط → X ── */
+  const lineColor = (menuOpen || scrolled) && !menuOpen ? C.ink : menuOpen ? C.cream : C.cream;
+  const lineStyle = (extra = {}) => ({
+    display: 'block', height: 1.5,
+    background: menuOpen ? C.cream : (scrolled ? C.ink : C.cream),
+    transition: 'all .25s', borderRadius: 1, ...extra,
+  });
+
   return (
-    <nav style={{
-      position: 'fixed', top: 0, right: 0, left: 0, zIndex: 1000,
-      transition: 'background .4s, border-color .4s',
-      background: scrolled ? 'rgba(249,241,232,.95)' : 'transparent',
-      backdropFilter: scrolled ? 'blur(16px)' : 'none',
-      borderBottom: `1px solid ${scrolled ? C.border : 'transparent'}`,
-    }}>
-      <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
-        <Logo height={30} light={!scrolled} />
-        <div style={{ display: 'flex', alignItems: 'center', gap: 36 }}>
-          {links.map(l => (
-            <button key={l.id} className="nav-lnk"
-              onClick={() => document.getElementById(l.id)?.scrollIntoView({ behavior: 'smooth' })}
+    <>
+      <nav style={{
+        position: 'fixed', top: 0, right: 0, left: 0, zIndex: 1000,
+        transition: 'background .3s, border-color .3s',
+        background: navBg,
+        backdropFilter: (scrolled && !menuOpen) ? 'blur(16px)' : 'none',
+        borderBottom: navBorder,
+      }}>
+        <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
+          <Logo height={30} light={light || menuOpen} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: desktop ? 36 : 0 }}>
+            {/* روابط الديسكتوب */}
+            {desktop && links.map(l => (
+              <button key={l.id}
+                onClick={() => document.getElementById(l.id)?.scrollIntoView({ behavior: 'smooth' })}
+                style={{
+                  fontFamily: F.sans, fontSize: 11, fontWeight: 600,
+                  letterSpacing: '0.14em', textTransform: 'uppercase',
+                  color: C.green, background: 'none', border: 'none', cursor: 'pointer',
+                  transition: 'color .2s',
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = C.ink}
+                onMouseLeave={e => e.currentTarget.style.color = C.green}
+              >{l.label}</button>
+            ))}
+            {desktop && <Btn kind="primary" size="sm" onClick={onBook}>اطلب ضيافتك</Btn>}
+
+            {/* زر الهامبورغر — جوال فقط */}
+            {!desktop && (
+              <button
+                onClick={() => setMenuOpen(o => !o)}
+                aria-label={menuOpen ? 'إغلاق القائمة' : 'فتح القائمة'}
+                style={{
+                  width: 44, height: 44, background: 'none', border: 'none',
+                  cursor: 'pointer', display: 'flex', flexDirection: 'column',
+                  justifyContent: 'center', alignItems: 'center', gap: 5, padding: 4,
+                }}
+              >
+                <span style={lineStyle({
+                  width: menuOpen ? 20 : 22,
+                  transform: menuOpen ? 'translateY(3.25px) rotate(45deg)' : 'none',
+                })} />
+                <span style={lineStyle({
+                  width: menuOpen ? 0 : 15,
+                  opacity: menuOpen ? 0 : 1,
+                })} />
+                <span style={lineStyle({
+                  width: menuOpen ? 20 : 22,
+                  transform: menuOpen ? 'translateY(-3.25px) rotate(-45deg)' : 'none',
+                })} />
+              </button>
+            )}
+          </div>
+        </Container>
+      </nav>
+
+      {/* ── القائمة الكاملة للجوال ── */}
+      {!desktop && menuOpen && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 999,
+          background: C.ink,
+          display: 'flex', flexDirection: 'column',
+          animation: 'menu-fade-in .2s ease both',
+        }}>
+          {/* مساحة شريط الـ Nav */}
+          <div style={{ height: 72, flexShrink: 0 }} />
+
+          {/* الروابط */}
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            {links.map((l, i) => (
+              <button
+                key={l.id}
+                onClick={() => scrollTo(l.id)}
+                style={{
+                  fontFamily: F.display, fontWeight: 700,
+                  fontSize: 'clamp(26px, 8vw, 44px)',
+                  color: C.cream, background: 'none', border: 'none',
+                  cursor: 'pointer', padding: '13px 32px',
+                  letterSpacing: '-0.01em', lineHeight: 1.1,
+                  transition: 'color .15s', width: '100%', textAlign: 'center',
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = C.beige}
+                onMouseLeave={e => e.currentTarget.style.color = C.cream}
+              >{l.label}</button>
+            ))}
+          </div>
+
+          {/* CTAs */}
+          <div style={{
+            padding: '28px 28px 44px',
+            borderTop: '1px solid rgba(194,164,128,.1)',
+            display: 'flex', flexDirection: 'column', gap: 14,
+          }}>
+            <Btn kind="cream" size="lg"
+              style={{ width: '100%', justifyContent: 'center' }}
+              onClick={() => { onBook(); setMenuOpen(false); }}
+            >اطلب ضيافتك</Btn>
+            <a href="https://wa.me/966539446123" target="_blank" rel="noreferrer"
               style={{
-                fontFamily: F.sans, fontSize: 11, fontWeight: 600,
+                fontFamily: F.sans, fontSize: 11, fontWeight: 700,
                 letterSpacing: '0.14em', textTransform: 'uppercase',
-                color: C.green, background: 'none', border: 'none', cursor: 'pointer',
-                display: 'none', transition: 'color .2s',
+                color: 'rgba(194,164,128,.5)', textAlign: 'center',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
               }}
-              onMouseEnter={e => e.currentTarget.style.color = C.ink}
-              onMouseLeave={e => e.currentTarget.style.color = C.green}
-            >{l.label}</button>
-          ))}
-          <Btn kind="primary" size="sm" onClick={onBook}>اطلب ضيافتك</Btn>
+            >تواصل عبر واتساب <span style={{ fontSize: 14 }}>↗</span></a>
+          </div>
         </div>
-      </Container>
-      <style>{`@media(min-width:900px){.nav-lnk{display:block!important}}`}</style>
-    </nav>
+      )}
+    </>
   );
 };
 
@@ -312,7 +426,7 @@ const Services = () => {
             <div key={i}
               style={{
                 padding: mobile ? '28px 24px' : '40px 36px',
-                borderLeft: !mobile && i % 3 !== 0 ? `1px solid ${C.border}` : 'none',
+                borderLeft: !mobile && i % 3 !== 2 ? `1px solid ${C.border}` : 'none',
                 borderBottom: !mobile ? (i < 3 ? `1px solid ${C.border}` : 'none') : (i < SERVICES.length - 1 ? `1px solid ${C.border}` : 'none'),
                 cursor: 'default', transition: 'background .25s',
               }}
@@ -435,7 +549,7 @@ const Philosophy = () => {
               return (
                 <div key={i} style={{
                   padding: mobile ? '24px 20px' : '32px 28px',
-                  borderLeft: i % cols !== 0 ? '1px solid rgba(194,164,128,.1)' : 'none',
+                  borderLeft: i % cols !== cols - 1 ? '1px solid rgba(194,164,128,.1)' : 'none',
                   borderBottom: i < 6 - cols ? '1px solid rgba(194,164,128,.1)' : 'none',
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
@@ -479,7 +593,7 @@ const Testimonials = () => {
           {testimonials.map((t, i) => (
             <div key={i} style={{
               padding: mobile ? '32px 24px' : '44px 36px', position: 'relative',
-              borderLeft: !mobile && i > 0 ? '1px solid rgba(194,164,128,.12)' : 'none',
+              borderLeft: !mobile && i < testimonials.length - 1 ? '1px solid rgba(194,164,128,.12)' : 'none',
               borderBottom: mobile && i < testimonials.length - 1 ? '1px solid rgba(194,164,128,.12)' : 'none',
             }}>
               <div style={{

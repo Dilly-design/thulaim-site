@@ -80,7 +80,7 @@ const Packages = ({ onBook }) => {
       }}>
         {PKGS.map((p, i) => (
           <div key={i} style={{
-            borderLeft: mobile ? (i % 2 !== 0 ? '1px solid rgba(194,164,128,.12)' : 'none') : (i > 0 ? '1px solid rgba(194,164,128,.12)' : 'none'),
+            borderLeft: mobile ? (i % 2 === 0 ? '1px solid rgba(194,164,128,.12)' : 'none') : (i < PKGS.length - 1 ? '1px solid rgba(194,164,128,.12)' : 'none'),
             borderBottom: mobile && i < PKGS.length - (PKGS.length % 2 === 0 ? 2 : 1) ? '1px solid rgba(194,164,128,.12)' : 'none',
             padding: mobile ? '24px 16px' : '36px 24px', display: 'flex', flexDirection: 'column', gap: 0,
             transition: 'background .25s',
