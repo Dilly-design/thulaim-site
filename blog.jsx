@@ -52,18 +52,12 @@ const Blog = ({ onBook }) => {
   return (
     <section style={{ background: C.creamD, padding: 'clamp(72px,13vh,160px) 0' }}>
       <Container>
-        <div style={{
-          display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
-          marginBottom: 56, flexWrap: 'wrap', gap: 16,
-        }}>
-          <SectionHeader
-            eyebrow="مقالات"
-            title="في الضيافة السعودية"
-            en="Saudi Hospitality Insights"
-            maxWidth={500}
-            style={{ marginBottom: 0 }}
-          />
-        </div>
+        <SectionHeader
+          eyebrow="مقالات"
+          title="في الضيافة السعودية"
+          en="Saudi Hospitality Insights"
+          maxWidth={500}
+        />
         <div style={{
           display: 'grid',
           gridTemplateColumns: mobile ? '1fr' : 'repeat(3, 1fr)',

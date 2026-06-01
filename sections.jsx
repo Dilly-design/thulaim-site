@@ -163,10 +163,10 @@ const HeritageStrip = () => {
     { n: '٣', sub: 'أقسام ضيافة', desc: 'للبادية والحضر وكبار الوفود' },
   ];
   const cols = mobile
-    ? '1fr 1px 1fr'
+    ? '1fr'
     : '1fr 1px 1fr 1px 1fr';
   const items = mobile
-    ? [stats[0], null, stats[1], stats[2]]
+    ? stats
     : [stats[0], null, stats[1], null, stats[2]];
   return (
     <section style={{
@@ -181,8 +181,7 @@ const HeritageStrip = () => {
         <div style={{
           display: 'grid',
           gridTemplateColumns: cols,
-          gridTemplateRows: mobile ? '1fr 1fr' : undefined,
-          gap: mobile ? '32px 0' : 0,
+          gap: 0,
           alignItems: 'center',
         }}>
           {items.map((item, i) => {
@@ -190,7 +189,13 @@ const HeritageStrip = () => {
               <div key={i} style={{ height: mobile ? 56 : 64, width: 1, background: 'rgba(194,164,128,.1)', justifySelf: 'center' }} />
             );
             return (
-              <div key={i} style={{ padding: `0 clamp(16px, ${mobile ? '4vw' : '3vw'}, 48px)`, textAlign: 'center' }}>
+              <div key={i} style={{
+                padding: `0 clamp(16px, ${mobile ? '4vw' : '3vw'}, 48px)`,
+                textAlign: 'center',
+                paddingTop: mobile ? 28 : 0,
+                paddingBottom: mobile ? 28 : 0,
+                borderBottom: mobile && i < items.length - 1 ? '1px solid rgba(194,164,128,.1)' : 'none',
+              }}>
                 <div style={{
                   fontFamily: F.display, fontWeight: 900,
                   fontSize: mobile ? 'clamp(28px, 8vw, 44px)' : 'clamp(32px, 4vw, 52px)',
@@ -649,7 +654,7 @@ const Footer = () => {
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
       }}>
         <div style={{ fontFamily: F.sans, fontSize: 10, color: 'rgba(147,149,128,.3)',
-          letterSpacing: '0.08em' }}>© ٢٠٢٥ ثُليم</div>
+          letterSpacing: '0.08em' }}>© ٢٠٢٦ ثُليم</div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Diamond size={4} color="rgba(194,164,128,.2)" />
           <span style={{ fontFamily: F.display, fontStyle: 'italic', fontWeight: 300,
