@@ -62,7 +62,7 @@ const PKGS = [
   { g: '٢٠', label: 'ضيافة موجزة',  desc: 'للمجالس الخاصة والاجتماعات الصغيرة',  occasion: 'مجلس خاص · اجتماع',      mains: 4, starters: 2, salads: 3, sweets: 3 },
   { g: '٣٠', label: 'ضيافة كاملة',  desc: 'مناسبة عائلية أو ضيافة شركة متوسطة', occasion: 'عائلي · شركات',           mains: 5, starters: 3, salads: 3, sweets: 4 },
   { g: '٤٠', label: 'ضيافة مكتملة', desc: 'مناسبات نسائية وعائلية بتنوع كامل',   occasion: 'نسائي · عائلي',           mains: 6, starters: 3, salads: 4, sweets: 4 },
-  { g: '٥٠', label: 'ضيافة فاخرة',  desc: 'ولائم رسمية ومناسبات كبار الضيوف',    occasion: 'وليمة رسمية · رمضان',     mains: 7, starters: 4, salads: 5, sweets: 5 },
+  { g: '٥٠', label: 'ضيافة فاخرة',  desc: 'ولائم رسمية ومناسبات كبار الضيوف',    occasion: 'وليمة رسمية · أعياد',      mains: 7, starters: 4, salads: 5, sweets: 5 },
   { g: '٦٠', label: 'وليمة كبرى',   desc: 'أكبر مناسباتك بحضور فاخر كامل',       occasion: 'أعراس · فعاليات كبرى',    mains: 8, starters: 5, salads: 5, sweets: 5 },
 ];
 

@@ -4,11 +4,11 @@
 ══════════════════════════════ */
 
 const OCCASIONS_LIST = [
-  { value: 'home',      label: 'مناسبة منزلية' },
-  { value: 'family',    label: 'عائلية' },
+  { value: 'mens',      label: 'مجلس رجالي' },
+  { value: 'ladies',    label: 'مناسبة نسائية' },
   { value: 'corporate', label: 'ضيافة شركات' },
+  { value: 'family',    label: 'مناسبة عائلية' },
   { value: 'waleema',   label: 'وليمة / عشاء' },
-  { value: 'ramadan',   label: 'رمضانية' },
   { value: 'other',     label: 'أخرى' },
 ];
 

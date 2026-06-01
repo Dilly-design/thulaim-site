@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1200px; height: 630px; overflow: hidden; background: #2a2620; }
+@font-face { font-family: 'TSD'; src: url('fonts/thmanyahserifdisplay-Bold.otf') format('opentype'); font-weight: 700; }
+@font-face { font-family: 'TSD'; src: url('fonts/thmanyahserifdisplay-Regular.otf') format('opentype'); font-weight: 400; }
+@font-face { font-family: 'TSANS'; src: url('fonts/thmanyahsans-Regular.otf') format('opentype'); font-weight: 400; }
+.card {
+  width: 1200px; height: 630px;
+  background: #2a2620;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 96px;
+  direction: rtl;
+}
+.bg-text {
+  position: absolute;
+  bottom: -40px; left: -10px;
+  font-family: 'TSD', serif;
+  font-weight: 700;
+  font-size: 420px;
+  color: rgba(194,164,128,.04);
+  line-height: 1;
+  user-select: none;
+  letter-spacing: -0.02em;
+}
+.border-line {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, transparent, #c2a480, transparent);
+}
+.eyebrow {
+  font-family: 'TSANS', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(194,164,128,.55);
+  letter-spacing: 0;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow-line { width: 32px; height: 1px; background: rgba(194,164,128,.4); }
+.title {
+  font-family: 'TSD', serif;
+  font-weight: 700;
+  font-size: 82px;
+  color: #f9f1e8;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.title span { color: #c2a480; }
+.sub {
+  font-family: 'TSD', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 24px;
+  color: rgba(194,164,128,.6);
+  margin-bottom: 40px;
+}
+.divider {
+  width: 56px; height: 1px;
+  background: rgba(194,164,128,.25);
+  margin-bottom: 28px;
+}
+.url {
+  font-family: 'TSANS', sans-serif;
+  font-size: 14px;
+  color: rgba(194,164,128,.4);
+  letter-spacing: 0;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="bg-text">ثليم</div>
+  <div class="border-line"></div>
+  <div class="eyebrow">
+    <span class="eyebrow-line"></span>
+    <span>الرياض · المملكة العربية السعودية</span>
+  </div>
+  <div class="title">
+    ضيافة ثليم<br>
+    <span>الفاخرة</span>
+  </div>
+  <div class="sub">ضيافة تُشرَّف، وكرم يُروى</div>
+  <div class="divider"></div>
+  <div class="url">thulaim.com</div>
+</div>
+</body>
+</html>

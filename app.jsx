@@ -35,7 +35,6 @@ const App = () => {
       <Nav onBook={() => openBooking()} />
       <Hero onBook={() => openBooking()} onMenu={() => openBooking()} tone={tweaks.heroTone} />
       <MarqueeStrip />
-      <HeritageStrip />
       <Story />
       <Services />
       <MenuPreview onBook={openBooking} />

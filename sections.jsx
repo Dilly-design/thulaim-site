@@ -56,7 +56,7 @@ const Nav = ({ onBook }) => {
         borderBottom: navBorder,
       }}>
         <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
-          <Logo height={30} light={light || menuOpen} />
+          <Logo height={44} light={light || menuOpen} />
           <div style={{ display: 'flex', alignItems: 'center', gap: desktop ? 36 : 0 }}>
             {/* روابط الديسكتوب */}
             {desktop && links.map(l => (
@@ -184,9 +184,8 @@ const Hero = ({ onBook, onMenu, tone = 'ink' }) => {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: mobile ? 36 : 52 }}>
           <span style={{ width: 40, height: 1, background: dark ? C.beige : C.burgundy }} />
-          <span style={{ fontFamily: F.sans, fontSize: 10, fontWeight: 700,
-            letterSpacing: '0.22em', textTransform: 'uppercase',
-            color: dark ? C.beige : C.burgundy }}>ثُليم ✦ الرياض</span>
+          <span style={{ fontFamily: F.sans, fontSize: 12, fontWeight: 700,
+            letterSpacing: 0, color: dark ? C.beige : C.burgundy }}>ضيافة ثليم</span>
         </div>
 
         <div style={{
@@ -266,74 +265,8 @@ const Hero = ({ onBook, onMenu, tone = 'ink' }) => {
   );
 };
 
-/* ══════════════════════════════
-   HERITAGE STRIP
-══════════════════════════════ */
-const HeritageStrip = () => {
-  const mobile = useIsMobile();
-  const stats = [
-    { n: '+١٥٠٠٠', sub: 'ضيف يومياً', desc: 'كان يستقبلهم مضيف ثُليم التاريخي' },
-    { n: '٨٥', sub: 'سنة من الإرث', desc: 'يستلهم منها ثُليم قيم ضيافتنا اليوم' },
-    { n: '٣', sub: 'أقسام ضيافة', desc: 'للبادية والحضر وكبار الوفود' },
-  ];
-  const cols = mobile
-    ? '1fr'
-    : '1fr 1px 1fr 1px 1fr';
-  const items = mobile
-    ? stats
-    : [stats[0], null, stats[1], null, stats[2]];
-  return (
-    <section style={{
-      background: C.ink, borderTop: '1px solid rgba(194,164,128,.08)',
-      padding: 'clamp(48px,8vh,100px) 0', position: 'relative', overflow: 'hidden',
-    }}>
-      <div style={{
-        position: 'absolute', left: 0, top: 0, bottom: 0, width: '3px',
-        background: `linear-gradient(to bottom, transparent, ${C.beige}, transparent)`,
-      }} />
-      <Container>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: cols,
-          gap: 0,
-          alignItems: 'center',
-        }}>
-          {items.map((item, i) => {
-            if (!item) return (
-              <div key={i} style={{ height: mobile ? 56 : 64, width: 1, background: 'rgba(194,164,128,.1)', justifySelf: 'center' }} />
-            );
-            return (
-              <div key={i} style={{
-                padding: `0 clamp(16px, ${mobile ? '4vw' : '3vw'}, 48px)`,
-                textAlign: 'center',
-                paddingTop: mobile ? 28 : 0,
-                paddingBottom: mobile ? 28 : 0,
-                borderBottom: mobile && i < items.length - 1 ? '1px solid rgba(194,164,128,.1)' : 'none',
-              }}>
-                <div style={{
-                  fontFamily: F.display, fontWeight: 900,
-                  fontSize: mobile ? 'clamp(28px, 8vw, 44px)' : 'clamp(32px, 4vw, 52px)',
-                  color: C.beige, lineHeight: 1, marginBottom: 8,
-                }}>{item.n}</div>
-                <div style={{
-                  fontFamily: F.sans, fontWeight: 700, fontSize: 9,
-                  color: 'rgba(194,164,128,.6)', letterSpacing: '0.18em',
-                  textTransform: 'uppercase', marginBottom: 6,
-                }}>{item.sub}</div>
-                {!mobile && (
-                  <div style={{
-                    fontFamily: F.text, fontWeight: 300, fontSize: 12,
-                    color: 'rgba(147,149,128,.45)', lineHeight: 1.7,
-                  }}>{item.desc}</div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </Container>
-    </section>
-  );
-};
+/* HeritageStrip removed — stats belonged to the historical مضيف, not the brand */
+const HeritageStrip = () => null;
 
 /* ══════════════════════════════
    PROCESS
@@ -541,7 +474,7 @@ const Philosophy = () => {
               { t: 'فريق خاص بك',    d: 'تُعيَّن لك فريقاً من أول تواصل وحتى نهاية المناسبة.' },
               { t: 'كل شيء مكتوب',   d: 'اتفاق مفصَّل على القائمة والعدد والتوقيت — لا مفاجآت.' },
               { t: 'نصل قبل ضيوفك',  d: 'الإعداد يبدأ بساعات قبل أول ضيف يطرق الباب.' },
-              { t: '٤٠ نقطة تحقق',   d: 'قائمة فحص شاملة لكل مناسبة — لا يُنسى فيها شيء.' },
+              { t: 'كل تفصيل مقصود', d: 'التقديم والترتيب والرائحة — جزء من الضيافة، لا إضافة عليها.' },
               { t: 'قائمة من الصفر',  d: 'لا قوائم جاهزة — كل مناسبة تُصمَّم لك من البداية.' },
               { t: 'للبيت والشركة',   d: 'خبرة في المجالسات العائلية والفعاليات الرسمية الكبرى.' },
             ].map((item, i) => {
@@ -579,7 +512,7 @@ const Testimonials = () => {
   const testimonials = [
     { q: 'الضيافة كانت على مستوى لا يُوصف — كل تفصيل كان مقصوداً ومرتّباً. الضيوف ما زالوا يتحدثون عنها.', n: 'أم عبدالعزيز', o: 'مناسبة عائلية' },
     { q: 'استخدمنا ثُليم لفعالية شركتنا وكانت المفاجأة الحقيقية للضيوف. التنفيذ كان بمستوى خمس نجوم.', n: 'م. سلطان الشمري', o: 'فعالية شركة' },
-    { q: 'رمضان هذا العام مع ثُليم كان مختلفاً تماماً. إحساس الكرم الحقيقي يظهر في كل تفصيل صغير.', n: 'أبو فيصل', o: 'إفطار رمضاني' },
+    { q: 'من أول تواصل حتى آخر لحظة في المناسبة — الفريق محترف والضيافة كانت على مستوى يليق بضيوفي.', n: 'م. خالد العمري', o: 'وليمة عائلية' },
   ];
   return (
     <section id="testimonials" style={{ background: C.ink, padding: 'clamp(72px,13vh,160px) 0' }}>
@@ -626,7 +559,7 @@ const FAQ = () => {
     { q: 'كيف أحجز مع ثُليم؟', a: 'تواصل معنا عبر نموذج الحجز في الموقع أو عبر واتساب مباشرة. نرد خلال ٢٤ ساعة لتأكيد التفاصيل وبدء بناء القائمة معك.' },
     { q: 'هل يمكن تخصيص القائمة بالكامل؟', a: 'نعم، بالكامل. كل مناسبة تُبنى قائمتها من الصفر بناءً على عدد ضيوفك، طبيعة المناسبة، وذوقك الخاص. لا توجد قوائم جاهزة.' },
     { q: 'هل تقدمون ضيافة للشركات والفعاليات؟', a: 'نعم، ضيافة الشركات من خدماتنا الأساسية. نقدم بوفيهات الاجتماعات والمؤتمرات والفعاليات بمستوى يعكس احترافية شركتك.' },
-    { q: 'هل تقدمون ضيافة للمناسبات الموسمية كرمضان والأعياد؟', a: 'نعم، نصمّم ضيافة المناسبات الموسمية بعناية خاصة — إفطار، سحور، عيد — بروح سعودية أصيلة تليق ببيتك أو شركتك.' },
+    { q: 'هل تقدمون ضيافة للمناسبات الموسمية والأعياد؟', a: 'نعم، نصمّم ضيافة المناسبات الموسمية والأعياد بعناية خاصة — بروح سعودية أصيلة تليق ببيتك أو شركتك.' },
     { q: 'كم من الوقت مسبقاً يجب الحجز؟', a: 'ننصح بالتواصل قبل ٧٢ ساعة على الأقل للمناسبات الصغيرة. للمناسبات الكبيرة والولائم ننصح بالحجز قبل أسبوع أو أكثر لضمان الجودة.' },
     { q: 'ماذا يشمل التجهيز والتقديم؟', a: 'يصل فريقنا قبل ضيوفك، يُجهّز طاولات الضيافة، ويُرتّب العرض بالكامل. بعد انتهاء المناسبة نتولى ترتيب وإزالة الأدوات. أنت تستمتع فقط.' },
     { q: 'ما الفرق بين ثُليم وخدمات الكيتارينق العادية؟', a: 'نحن لسنا مجرد مزوّد طعام. ثُليم يصمّم تجربة ضيافة متكاملة: القائمة، التقديم، الترتيب، والأثر. كل تفصيل مقصود ليعكس مستوى مناسبتك.' },
@@ -693,7 +626,7 @@ const Footer = () => {
     <Container>
       <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr 1fr' : '1.6fr 1fr 1fr 1fr', gap: mobile ? '40px 24px' : 56, paddingBottom: mobile ? 40 : 64 }}>
         <div>
-          <Logo light height={32} />
+          <Logo light height={40} />
           <p style={{ fontFamily: F.text, fontWeight: 300, fontSize: 14, lineHeight: 1.95,
             color: 'rgba(147,149,128,.6)', marginTop: 24, maxWidth: 260 }}>
             بيت ضيافة سعودي حديث مستوحى من عراقة الكرم السعودي الأصيل. الرياض، المملكة العربية السعودية.
