@@ -349,6 +349,29 @@ const Philosophy = () => {
       <Container>
         <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: mobile ? 48 : 96, alignItems: 'center' }}>
           <div>
+            {[
+              { t: 'هادئ',  d: 'بلا ضجيج بصري — كل عنصر له غرض واضح.' },
+              { t: 'مدروس', d: 'كل تفصيل يُختار بوعي، لا بالصدفة.' },
+              { t: 'موثوق', d: 'دقة التنفيذ في كل مناسبة، بلا استثناء.' },
+              { t: 'عريق',  d: 'إرث حضاري راسخ يُلهم كل تجربة نُقدّمها.' },
+            ].map((v, i) => (
+              <div key={i} style={{
+                display: 'flex', gap: 24, alignItems: 'flex-start',
+                padding: '24px 0', borderBottom: '1px solid rgba(194,164,128,.1)',
+              }}>
+                <span style={{ fontFamily: F.sans, fontSize: 9, fontWeight: 700,
+                  color: 'rgba(194,164,128,.35)', letterSpacing: '0.1em',
+                  flexShrink: 0, paddingTop: 4 }}>{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <div style={{ fontFamily: F.display, fontWeight: 700, fontSize: 20,
+                    color: C.beige, marginBottom: 6 }}>{v.t}</div>
+                  <div style={{ fontFamily: F.text, fontWeight: 300, fontSize: 14,
+                    lineHeight: 1.8, color: 'rgba(147,149,128,.7)' }}>{v.d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div>
             <Eyebrow light>فلسفتنا</Eyebrow>
             <h2 style={{
               fontFamily: F.display, fontWeight: 900,
@@ -371,29 +394,6 @@ const Philosophy = () => {
               <span style={{ fontFamily: F.text, fontStyle: 'italic', fontWeight: 300,
                 fontSize: 16, color: 'rgba(194,164,128,.45)', letterSpacing: '0.04em' }}>مضيف ثُليم — الرياض ١٩٤٠م</span>
             </div>
-          </div>
-          <div>
-            {[
-              { t: 'هادئ',  d: 'بلا ضجيج بصري — كل عنصر له غرض واضح.' },
-              { t: 'مقصود', d: 'كل تفصيل يُختار بوعي، لا بالصدفة.' },
-              { t: 'موثوق', d: 'دقة التنفيذ في كل مناسبة، بلا استثناء.' },
-              { t: 'عريق',  d: 'إرث حضاري راسخ يُلهم كل تجربة نُقدّمها.' },
-            ].map((v, i) => (
-              <div key={i} style={{
-                display: 'flex', gap: 24, alignItems: 'flex-start',
-                padding: '24px 0', borderBottom: '1px solid rgba(194,164,128,.1)',
-              }}>
-                <span style={{ fontFamily: F.sans, fontSize: 9, fontWeight: 700,
-                  color: 'rgba(194,164,128,.35)', letterSpacing: '0.1em',
-                  flexShrink: 0, paddingTop: 4 }}>{String(i + 1).padStart(2, '0')}</span>
-                <div>
-                  <div style={{ fontFamily: F.display, fontWeight: 700, fontSize: 20,
-                    color: C.beige, marginBottom: 6 }}>{v.t}</div>
-                  <div style={{ fontFamily: F.text, fontWeight: 300, fontSize: 14,
-                    lineHeight: 1.8, color: 'rgba(147,149,128,.7)' }}>{v.d}</div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
 
