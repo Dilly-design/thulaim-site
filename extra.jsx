@@ -46,7 +46,7 @@ const Story = () => {
               fontFamily: F.text, fontStyle: 'italic', fontWeight: 300,
               fontSize: mobile ? 16 : 19, color: C.ink, lineHeight: 1.75, marginBottom: 36,
             }}>
-              "كل وليمة عند ثُليم تبدأ من فكرة واحدة: الضيف شَرَف."
+              "ضيافة تُشرَّف، وتُبهر، وتُعبّر عنك."
             </blockquote>
             <div style={{ display: 'flex', gap: mobile ? 24 : 48 }}>
               {[{ n: '١٩٤٠', l: 'مضيف ثُليم' }, { n: '+١٥٠٠٠', l: 'ضيف يومياً' }, { n: 'اليوم', l: 'نكمل المسيرة' }].map((t, i) => (

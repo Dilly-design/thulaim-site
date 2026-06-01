@@ -33,21 +33,17 @@ const App = () => {
   return (
     <>
       <Nav onBook={() => openBooking()} />
-      <Hero onBook={() => openBooking()} onMenu={() => scrollTo('menu')} tone={tweaks.heroTone} />
+      <Hero onBook={() => openBooking()} onMenu={() => openBooking()} tone={tweaks.heroTone} />
       <MarqueeStrip />
       <HeritageStrip />
       <Story />
       <Services />
       <Philosophy />
-      <MenuPreview onBook={openBooking} />
-      <Packages onBook={openBooking} />
       <Gallery />
-      <Blog onBook={openBooking} />
       <Process onBook={() => openBooking()} />
-      <Trust />
       <Testimonials />
       <FAQ />
-      <CTABanner onBook={() => openBooking()} />
+      <Blog onBook={openBooking} />
       <Footer />
       <StickyWA />
       <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} prefill={prefill} />

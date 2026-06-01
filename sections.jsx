@@ -10,8 +10,6 @@ const Nav = ({ onBook }) => {
   }, []);
   const links = [
     { label: 'خدماتنا', id: 'services' },
-    { label: 'القائمة', id: 'menu' },
-    { label: 'الباقات', id: 'packages' },
     { label: 'قصتنا', id: 'story' },
     { label: 'أسئلة', id: 'faq' },
   ];
@@ -74,7 +72,7 @@ const Hero = ({ onBook, onMenu, tone = 'ink' }) => {
           <span style={{ width: 40, height: 1, background: dark ? C.beige : C.burgundy }} />
           <span style={{ fontFamily: F.sans, fontSize: 10, fontWeight: 700,
             letterSpacing: '0.22em', textTransform: 'uppercase',
-            color: dark ? C.beige : C.burgundy }}>بيت ضيافة سعودي — الرياض</span>
+            color: dark ? C.beige : C.burgundy }}>ثُليم ✦ الرياض</span>
         </div>
 
         <div style={{
@@ -121,7 +119,7 @@ const Hero = ({ onBook, onMenu, tone = 'ink' }) => {
           flexWrap: 'wrap',
         }}>
           <Btn kind={dark ? 'cream' : 'primary'} size={mobile ? 'md' : 'lg'} onClick={onBook}>اطلب ضيافتك</Btn>
-          {!mobile && <Btn kind={dark ? 'ghost-light' : 'ghost'} size="lg" onClick={onMenu}>صمّم قائمتك</Btn>}
+          {!mobile && <Btn kind={dark ? 'ghost-light' : 'ghost'} size="lg" onClick={onBook}>صمّم قائمتك</Btn>}
           <a href="https://wa.me/966539446123" target="_blank" rel="noreferrer"
             style={{
               fontFamily: F.sans, fontSize: 11, fontWeight: 700,
@@ -137,7 +135,7 @@ const Hero = ({ onBook, onMenu, tone = 'ink' }) => {
           color: dark ? 'rgba(218,200,179,.6)' : C.green,
           maxWidth: 520, marginTop: 20,
         }}>
-          ثُليم يصمّم وينفّذ ضيافة نجدية راقية للبيوت، الشركات، المناسبات العائلية، والولائم الخاصة.
+          ثُليم يصمّم وينفّذ ضيافة سعودية فاخرة للبيوت، الشركات، المناسبات العائلية، والولائم الخاصة.
         </p>
       </Container>
 
@@ -160,17 +158,16 @@ const Hero = ({ onBook, onMenu, tone = 'ink' }) => {
 const HeritageStrip = () => {
   const mobile = useIsMobile();
   const stats = [
-    { n: '١٩٤٠', sub: 'عام تأسيس مضيف ثُليم', desc: 'بأمر من الملك عبدالعزيز في الرياض' },
     { n: '+١٥٠٠٠', sub: 'ضيف يومياً', desc: 'كان يستقبلهم مضيف ثُليم التاريخي' },
-    { n: '٣', sub: 'أقسام ضيافة', desc: 'للبادية والحضر وكبار الوفود' },
     { n: '٨٥', sub: 'سنة من الإرث', desc: 'يستلهم منها ثُليم قيم ضيافتنا اليوم' },
+    { n: '٣', sub: 'أقسام ضيافة', desc: 'للبادية والحضر وكبار الوفود' },
   ];
   const cols = mobile
     ? '1fr 1px 1fr'
-    : '1fr 1px 1fr 1px 1fr 1px 1fr';
+    : '1fr 1px 1fr 1px 1fr';
   const items = mobile
-    ? [stats[0], null, stats[1], stats[2], null, stats[3]]
-    : [stats[0], null, stats[1], null, stats[2], null, stats[3]];
+    ? [stats[0], null, stats[1], stats[2]]
+    : [stats[0], null, stats[1], null, stats[2]];
   return (
     <section style={{
       background: C.ink, borderTop: '1px solid rgba(194,164,128,.08)',
@@ -292,11 +289,10 @@ const Process = ({ onBook }) => {
 ══════════════════════════════ */
 const SERVICES = [
   { ar: 'مناسبات نسائية', en: 'Ladies Events',           desc: 'ضيافة راقية تليق بأجواء المناسبات النسائية الخاصة والحفلات.' },
-  { ar: 'مناسبات رجالية', en: "Gentlemen's Gatherings",  desc: 'ولائم وبوفيهات بمستوى يعكس شرف الضيافة النجدية الأصيلة.' },
+  { ar: 'مناسبات رجالية', en: "Gentlemen's Gatherings",  desc: 'ولائم وبوفيهات بمستوى يعكس شرف الضيافة السعودية الأصيلة.' },
   { ar: 'ضيافة شركات',   en: 'Corporate Hospitality',   desc: 'اجتماعات ومؤتمرات وفعاليات الشركات بتنفيذ محترف ودقيق.' },
   { ar: 'مناسبات عائلية',en: 'Family Occasions',        desc: 'أعراس وخطوبات ومناسبات العائلة بروح الكرم السعودي.' },
   { ar: 'تجارب مخصّصة', en: 'Bespoke Experiences',     desc: 'قوائم وأجواء مصمّمة تماماً حسب طبيعة مناسبتك.' },
-  { ar: 'ضيافة رمضان',  en: 'Ramadan Hospitality',     desc: 'تجربة إفطار وسحور رمضانية بلمسة نجدية دافئة وأصيلة.' },
 ];
 
 const Services = () => {
@@ -311,7 +307,7 @@ const Services = () => {
             <div key={i}
               style={{
                 padding: mobile ? '28px 24px' : '40px 36px',
-                borderLeft: !mobile && i % 3 !== 2 ? `1px solid ${C.border}` : 'none',
+                borderLeft: !mobile && i % 3 !== 0 ? `1px solid ${C.border}` : 'none',
                 borderBottom: !mobile ? (i < 3 ? `1px solid ${C.border}` : 'none') : (i < SERVICES.length - 1 ? `1px solid ${C.border}` : 'none'),
                 cursor: 'default', transition: 'background .25s',
               }}
@@ -381,7 +377,7 @@ const Philosophy = () => {
               { t: 'هادئ',  d: 'بلا ضجيج بصري — كل عنصر له غرض واضح.' },
               { t: 'مقصود', d: 'كل تفصيل يُختار بوعي، لا بالصدفة.' },
               { t: 'موثوق', d: 'دقة التنفيذ في كل مناسبة، بلا استثناء.' },
-              { t: 'نجدي',  d: 'جذور أصيلة تُلهم كل تجربة نُقدّمها.' },
+              { t: 'عريق',  d: 'إرث حضاري راسخ يُلهم كل تجربة نُقدّمها.' },
             ].map((v, i) => (
               <div key={i} style={{
                 display: 'flex', gap: 24, alignItems: 'flex-start',
@@ -400,49 +396,58 @@ const Philosophy = () => {
             ))}
           </div>
         </div>
-      </Container>
-    </section>
-  );
-};
 
-/* ══════════════════════════════
-   TRUST
-══════════════════════════════ */
-const Trust = () => {
-  const mobile = useIsMobile();
-  const items = [
-    { t: 'فريق متخصص',   d: 'كل مناسبة لها فريقها المخصص من البداية للنهاية.' },
-    { t: 'تأكيد موثّق',  d: 'اتفاق واضح على القائمة والعدد والتوقيت قبل اليوم.' },
-    { t: 'تجهيز محسوب', d: 'الإعداد يبدأ بساعات قبل وصول ضيوفك.' },
-    { t: '٤٠ نقطة فحص', d: 'قائمة تحقق لكل مناسبة تضمن كل التفاصيل.' },
-    { t: 'تخصيص كامل',  d: 'لا قوائم جاهزة — كل مناسبة تُبنى من جديد.' },
-    { t: 'بيوت وشركات', d: 'خبرة في المجالسات العائلية والفعاليات الكبرى.' },
-  ];
-  const cols = mobile ? 2 : 3;
-  return (
-    <section id="trust" style={{ background: C.creamD, padding: 'clamp(72px,13vh,160px) 0' }}>
-      <Container>
-        <SectionHeader eyebrow="معاييرنا" title="ستة معايير لا نتنازل عنها" align="center" maxWidth={560} />
-        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: 1, border: `1px solid ${C.border}` }}>
-          {items.map((item, i) => (
-            <div key={i} style={{
-              background: C.cream, padding: mobile ? '24px 20px' : '36px 32px',
-              borderLeft: i % cols !== cols - 1 ? `1px solid ${C.border}` : 'none',
-              borderBottom: i < items.length - cols ? `1px solid ${C.border}` : 'none',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
-                <Diamond size={6} />
-                <span style={{ fontFamily: F.display, fontWeight: 700, fontSize: mobile ? 16 : 18, color: C.ink }}>{item.t}</span>
-              </div>
-              <p style={{ fontFamily: F.text, fontWeight: 300, fontSize: 14,
-                lineHeight: 1.85, color: C.green, margin: 0 }}>{item.d}</p>
-            </div>
-          ))}
+        {/* ── معاييرنا — merged ── */}
+        <div style={{ borderTop: '1px solid rgba(194,164,128,.1)', paddingTop: 'clamp(48px,7vh,80px)' }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16,
+            marginBottom: 40,
+            fontFamily: F.sans, fontSize: 10, fontWeight: 700,
+            letterSpacing: '0.22em', textTransform: 'uppercase',
+            color: 'rgba(194,164,128,.4)',
+          }}>
+            <span style={{ width: 24, height: 1, background: 'rgba(194,164,128,.3)' }} />
+            معاييرنا
+            <span style={{ width: 24, height: 1, background: 'rgba(194,164,128,.3)' }} />
+          </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: mobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+            gap: 1, border: '1px solid rgba(194,164,128,.1)',
+          }}>
+            {[
+              { t: 'فريق متخصص',   d: 'كل مناسبة لها فريقها المخصص من البداية للنهاية.' },
+              { t: 'تأكيد موثّق',  d: 'اتفاق واضح على القائمة والعدد والتوقيت قبل اليوم.' },
+              { t: 'تجهيز محسوب', d: 'الإعداد يبدأ بساعات قبل وصول ضيوفك.' },
+              { t: '٤٠ نقطة فحص', d: 'قائمة تحقق لكل مناسبة تضمن كل التفاصيل.' },
+              { t: 'تخصيص كامل',  d: 'لا قوائم جاهزة — كل مناسبة تُبنى من جديد.' },
+              { t: 'بيوت وشركات', d: 'خبرة في المجالسات العائلية والفعاليات الكبرى.' },
+            ].map((item, i) => {
+              const cols = mobile ? 2 : 3;
+              return (
+                <div key={i} style={{
+                  padding: mobile ? '24px 20px' : '32px 28px',
+                  borderLeft: i % cols !== 0 ? '1px solid rgba(194,164,128,.1)' : 'none',
+                  borderBottom: i < 6 - cols ? '1px solid rgba(194,164,128,.1)' : 'none',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
+                    <Diamond size={5} color="rgba(194,164,128,.45)" />
+                    <span style={{ fontFamily: F.display, fontWeight: 700, fontSize: mobile ? 15 : 17, color: C.cream }}>{item.t}</span>
+                  </div>
+                  <p style={{ fontFamily: F.text, fontWeight: 300, fontSize: 13,
+                    lineHeight: 1.85, color: 'rgba(147,149,128,.6)', margin: 0 }}>{item.d}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </Container>
     </section>
   );
 };
+
+/* Trust — merged into Philosophy */
+const Trust = () => null;
 
 /* ══════════════════════════════
    TESTIMONIALS
@@ -553,47 +558,8 @@ const FAQ = () => {
   );
 };
 
-/* ══════════════════════════════
-   CTA BANNER
-══════════════════════════════ */
-const CTABanner = ({ onBook }) => (
-  <section style={{ background: C.burgundy, padding: 'clamp(80px,11vh,128px) 0', position: 'relative', overflow: 'hidden' }}>
-    <div style={{
-      position: 'absolute', inset: 0, pointerEvents: 'none',
-      background: 'radial-gradient(ellipse 70% 80% at 50% 100%, rgba(42,38,32,.3) 0%, transparent 60%)',
-    }} />
-    <Container style={{ textAlign: 'center', position: 'relative' }}>
-      <div style={{ fontFamily: F.display, fontStyle: 'italic', fontWeight: 300,
-        fontSize: 15, color: 'rgba(249,241,232,.45)', marginBottom: 20,
-        letterSpacing: '0.08em' }}>Premium Saudi Hospitality</div>
-      <h2 style={{
-        fontFamily: F.display, fontWeight: 900,
-        fontSize: 'clamp(32px, 5vw, 72px)', color: C.cream,
-        lineHeight: 1.05, marginBottom: 20, letterSpacing: '-0.02em',
-      }}>
-        مناسبتك القادمة<br />تبدأ بمحادثة هادئة
-      </h2>
-      <p style={{ fontFamily: F.text, fontWeight: 300, fontSize: 17,
-        color: 'rgba(249,241,232,.6)', marginBottom: 44 }}>
-        الكرم يبدأ بكلمة
-      </p>
-      <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-        <Btn kind="cream" size="lg" onClick={onBook}>اطلب ضيافتك</Btn>
-        <a href="https://wa.me/966539446123" target="_blank" rel="noreferrer"
-          style={{
-            fontFamily: F.sans, fontSize: 12, fontWeight: 700,
-            letterSpacing: '0.1em', textTransform: 'uppercase',
-            color: 'rgba(249,241,232,.7)', padding: '18px 36px',
-            border: '1px solid rgba(249,241,232,.25)', display: 'inline-flex',
-            alignItems: 'center', gap: 8, transition: 'border-color .2s',
-          }}
-          onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(249,241,232,.5)'}
-          onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(249,241,232,.25)'}
-        >واتساب</a>
-      </div>
-    </Container>
-  </section>
-);
+/* CTABanner — removed per brand review */
+const CTABanner = () => null;
 
 /* ══════════════════════════════
    FOOTER
@@ -635,11 +601,11 @@ const Footer = () => {
         {[
           { title: 'خدماتنا', links: [
             { l: 'مناسبات نسائية' }, { l: 'مناسبات رجالية' },
-            { l: 'ضيافة شركات' }, { l: 'مناسبات عائلية' }, { l: 'ضيافة رمضان' },
+            { l: 'ضيافة شركات' }, { l: 'مناسبات عائلية' },
           ]},
           { title: 'استكشف', links: [
-            { l: 'قصتنا', id: 'story' }, { l: 'القائمة', id: 'menu' },
-            { l: 'الباقات', id: 'packages' }, { l: 'الأسئلة الشائعة', id: 'faq' },
+            { l: 'قصتنا', id: 'story' },
+            { l: 'الأسئلة الشائعة', id: 'faq' },
           ]},
           { title: 'تواصل', links: [
             { l: 'واتساب', href: 'https://wa.me/966539446123' },
