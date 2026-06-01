@@ -38,6 +38,7 @@ const App = () => {
       <HeritageStrip />
       <Story />
       <Services />
+      <MenuPreview onBook={openBooking} />
       <Philosophy />
       <Gallery />
       <Process onBook={() => openBooking()} />
