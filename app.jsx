@@ -33,11 +33,11 @@ const App = () => {
   return (
     <>
       <Nav onBook={() => openBooking()} />
-      <Hero onBook={() => openBooking()} onMenu={() => openBooking()} tone={tweaks.heroTone} />
+      <Hero onBook={() => openBooking()} tone={tweaks.heroTone} />
+      <MenuPreview onBook={openBooking} />
       <MarqueeStrip />
       <Story />
       <Services />
-      <MenuPreview onBook={openBooking} />
       <Philosophy />
       <Gallery />
       <Process onBook={() => openBooking()} />

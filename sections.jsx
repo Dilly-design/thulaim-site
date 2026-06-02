@@ -162,7 +162,7 @@ const Nav = ({ onBook }) => {
 /* ══════════════════════════════
    HERO
 ══════════════════════════════ */
-const Hero = ({ onBook, onMenu, tone = 'ink' }) => {
+const Hero = ({ onBook, tone = 'ink' }) => {
   const dark    = tone === 'ink';
   const bg      = dark ? C.ink   : C.cream;
   const fg      = dark ? C.cream : C.ink;
@@ -232,7 +232,6 @@ const Hero = ({ onBook, onMenu, tone = 'ink' }) => {
           flexWrap: 'wrap',
         }}>
           <Btn kind={dark ? 'cream' : 'primary'} size={mobile ? 'md' : 'lg'} onClick={onBook}>اطلب ضيافتك</Btn>
-          {!mobile && <Btn kind={dark ? 'ghost-light' : 'ghost'} size="lg" onClick={onBook}>صمّم قائمتك</Btn>}
           <a href="https://wa.me/966539446123" target="_blank" rel="noreferrer"
             style={{
               fontFamily: F.sans, fontSize: 11, fontWeight: 700,

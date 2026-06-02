@@ -64,9 +64,9 @@ const buildRecommended = (guests) => {
 
 /* ── Menu Preview (always-visible section) ── */
 const MenuPreview = ({ onBook }) => (
-  <section id="menu" style={{ background: C.creamD, padding: 'clamp(72px,10vh,120px) 0' }}>
+  <section id="menu" style={{ background: C.cream, padding: 'clamp(56px,8vh,96px) 0 clamp(72px,10vh,120px)' }}>
     <Container>
-      <SectionHeader eyebrow="قائمة ثُليم" title="صمّم ضيافتك" en="Build Your Menu" sub="اختر بنفسك أو دعنا نقترح لك — كل قائمة تُبنى خصيصاً لمناسبتك." />
+      <SectionHeader eyebrow="قائمة ثليم" title="صمّم ضيافتك" en="Build Your Menu" sub="اختر الأصناف بنفسك أو دعنا نقترح لك — كل قائمة تُبنى خصيصاً لعدد ضيوفك." />
       <MenuBuilder onBook={onBook} />
     </Container>
   </section>
