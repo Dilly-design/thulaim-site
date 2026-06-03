@@ -182,30 +182,41 @@ const PriceBox = ({ guests, wantsSetup }) => {
   );
 };
 
-/* ── Menu Step ── */
-const MenuStep = ({ guests, selections, onToggle, activeCat, onCatChange }) => {
+/* ── Menu Step — اقتراح مُعبّأ مسبقاً + حد لكل فئة ── */
+const MenuStep = ({ guests, selections, onToggle, onReset, activeCat, onCatChange }) => {
+  const limits   = getLimits(guests);
   const cat      = MENU_CATS[activeCat] || MENU_CATS[0];
   const selected = selections[cat.t] || [];
+  const limit    = limits[cat.t] || 2;
+  const full     = selected.length >= limit;
   const totalSelected = MENU_CATS.reduce((acc, c) => acc + (selections[c.t]?.length || 0), 0);
 
   return (
     <div>
-      <div style={{ fontFamily: F.display, fontWeight: 900, fontSize: 22, color: C.ink, marginBottom: 6, lineHeight: 1.2 }}>
-        اختر قائمتك
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 6 }}>
+        <div style={{ fontFamily: F.display, fontWeight: 900, fontSize: 22, color: C.ink, lineHeight: 1.2 }}>
+          قائمتك لـ {guests} ضيف
+        </div>
+        <button type="button" onClick={onReset}
+          style={{ fontFamily: F.sans, fontSize: 10, fontWeight: 600, letterSpacing: '0.06em', color: C.greenL,
+            background: 'none', border: `1px solid ${C.border}`, borderRadius: 0, padding: '7px 11px', cursor: 'pointer', flexShrink: 0, whiteSpace: 'nowrap' }}
+        >↺ أعد الاقتراح</button>
       </div>
       <p style={{ fontFamily: F.text, fontWeight: 300, fontSize: 14, color: C.green, marginBottom: 20, lineHeight: 1.6 }}>
-        اقترحنا أطباقاً مناسبة لـ <strong style={{ fontWeight: 500 }}>{guests} ضيف</strong> — عدّل كما يناسبك، أو تجاوز الخطوة
+        اخترنا لك الأكثر طلباً تلقائياً — عدّل ما تشاء ضمن الحد المسموح لكل فئة.
       </p>
 
-      {/* Category tabs */}
+      {/* Category tabs — count / limit */}
       <div style={{
         display: 'flex', overflowX: 'auto', borderBottom: `1px solid ${C.border}`,
         marginBottom: 16, gap: 0,
         scrollbarWidth: 'none', msOverflowStyle: 'none',
       }}>
         {MENU_CATS.map((c, i) => {
-          const count = selections[c.t]?.length || 0;
+          const count  = selections[c.t]?.length || 0;
+          const cLimit = limits[c.t] || 2;
           const active = activeCat === i;
+          const cFull  = count >= cLimit;
           return (
             <button key={i} type="button" onClick={() => onCatChange(i)}
               style={{
@@ -218,43 +229,68 @@ const MenuStep = ({ guests, selections, onToggle, activeCat, onCatChange }) => {
               }}
             >
               {c.t}
-              {count > 0 && (
-                <span style={{
-                  background: C.ink, color: C.beige,
-                  fontFamily: F.sans, fontSize: 9, fontWeight: 700,
-                  borderRadius: '50%', width: 16, height: 16,
-                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                  flexShrink: 0,
-                }}>{count}</span>
-              )}
+              <span style={{
+                background: cFull ? C.burgundy : count > 0 ? C.ink : C.border,
+                color: cFull || count > 0 ? C.beige : C.greenL,
+                fontFamily: F.sans, fontSize: 9, fontWeight: 700,
+                borderRadius: 0, padding: '2px 5px', lineHeight: 1.2,
+                display: 'inline-flex', alignItems: 'center', flexShrink: 0,
+              }}>{count}/{cLimit}</span>
             </button>
           );
         })}
       </div>
 
-      {/* Items */}
+      {/* Active category header — limit + dots */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, gap: 10 }}>
+        <span style={{ fontFamily: F.sans, fontSize: 10, color: C.greenL, letterSpacing: '0.06em' }}>
+          اختر {limit} {limit === 1 ? 'صنف' : 'أصناف'}{cat.optional ? ' · فئة إضافية' : ''}
+        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 4 }}>
+            {Array.from({ length: limit }).map((_, di) => (
+              <div key={di} style={{ width: 7, height: 7, borderRadius: '50%',
+                background: di < selected.length ? C.burgundy : C.border, transition: 'background .15s' }} />
+            ))}
+          </div>
+          <span style={{ fontFamily: F.sans, fontSize: 11, fontWeight: 700, color: full ? C.burgundy : selected.length > 0 ? C.ink : C.greenL }}>
+            {selected.length}/{limit}{full && ' ✓'}
+          </span>
+        </div>
+      </div>
+
+      {/* Items — disabled when category full */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, minHeight: 100 }}>
         {cat.items.map(item => {
           const sel = selected.includes(item);
           const pop = cat.popular?.includes(item);
+          const disabled = full && !sel;
           return (
-            <button key={item} type="button" onClick={() => onToggle(cat.t, item)}
+            <button key={item} type="button" onClick={() => !disabled && onToggle(cat.t, item)}
               style={{
-                padding: '8px 14px', cursor: 'pointer', borderRadius: 0,
-                fontFamily: F.text, fontWeight: 300, fontSize: 13,
+                padding: '8px 14px', borderRadius: 0,
+                cursor: disabled ? 'not-allowed' : 'pointer',
+                fontFamily: F.text, fontWeight: sel ? 500 : 300, fontSize: 13,
                 background: sel ? C.ink : 'transparent',
-                color: sel ? C.cream : C.ink,
-                border: `1px solid ${sel ? C.ink : C.border}`,
+                color: sel ? C.cream : disabled ? 'rgba(42,38,32,.25)' : C.ink,
+                border: `1px solid ${sel ? C.ink : disabled ? 'rgba(42,38,32,.1)' : C.border}`,
+                opacity: disabled ? 0.55 : 1,
                 display: 'flex', alignItems: 'center', gap: 5,
                 transition: 'all .15s',
               }}
             >
-              {pop && <span style={{ color: sel ? C.beige : C.beige, fontSize: 10, lineHeight: 1 }}>★</span>}
+              {pop && !sel && !disabled && <span style={{ color: C.beige, fontSize: 10, lineHeight: 1 }}>★</span>}
               {item}
             </button>
           );
         })}
       </div>
+
+      {full && (
+        <div style={{ marginTop: 10, fontFamily: F.sans, fontSize: 10, color: C.burgundy, letterSpacing: '0.06em', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span>✓</span><span>اكتمل عدد هذه الفئة — ألغِ اختياراً لتستبدله</span>
+        </div>
+      )}
 
       {/* Summary */}
       {totalSelected > 0 && (
@@ -314,11 +350,16 @@ const BookingModal = ({ open, onClose, prefill }) => {
   const setLog   = (k, v) => setData(d => ({ ...d, logistics: { ...d.logistics, [k]: v } }));
   const toggleItem = (cat, item) => {
     setData(d => {
+      const limit = getLimits(d.guests)[cat] || 99;
       const cur = d.menuSelections[cat] || [];
-      const upd = cur.includes(item) ? cur.filter(x => x !== item) : [...cur, item];
+      let upd;
+      if (cur.includes(item)) upd = cur.filter(x => x !== item);
+      else if (cur.length < limit) upd = [...cur, item];   // احترام الحد المسموح
+      else upd = cur;                                        // الفئة مكتملة
       return { ...d, menuSelections: { ...d.menuSelections, [cat]: upd } };
     });
   };
+  const resetMenu = () => setData(d => ({ ...d, menuSelections: buildRecommended(d.guests) }));
 
   /* Validation per step */
   const canNext = [
@@ -484,7 +525,9 @@ const BookingModal = ({ open, onClose, prefill }) => {
 
                 <div>
                   <FieldLabel>عدد الضيوف</FieldLabel>
-                  <ChipRow value={data.guests} onChange={v => set('guests', v)} options={GUESTS_OPTIONS} cols={3} />
+                  <ChipRow value={data.guests}
+                    onChange={v => setData(d => ({ ...d, guests: v, menuSelections: {} }))}
+                    options={GUESTS_OPTIONS} cols={3} />
                 </div>
 
                 {data.guests && (
@@ -499,6 +542,7 @@ const BookingModal = ({ open, onClose, prefill }) => {
                 guests={data.guests}
                 selections={data.menuSelections}
                 onToggle={toggleItem}
+                onReset={resetMenu}
                 activeCat={data.menuCat || 0}
                 onCatChange={v => set('menuCat', v)}
               />

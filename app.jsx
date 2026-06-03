@@ -34,7 +34,6 @@ const App = () => {
     <>
       <Nav onBook={() => openBooking()} />
       <Hero onBook={() => openBooking()} tone={tweaks.heroTone} />
-      <MenuPreview onBook={openBooking} />
       <MarqueeStrip />
       <Story />
       <Services />
