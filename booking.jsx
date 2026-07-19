@@ -434,7 +434,7 @@ const BookingModal = ({ open, onClose, prefill }) => {
       `المصدر: ${data.source} | الحالة: طلب جديد`,
     ];
 
-    window.open(`https://wa.me/966539446123?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+    window.open(`https://wa.me/966579444843?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
     setSub(true);
     setSend(false);
   };

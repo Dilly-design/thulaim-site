@@ -144,7 +144,7 @@ const Nav = ({ onBook }) => {
               style={{ width: '100%', justifyContent: 'center' }}
               onClick={() => { onBook(); setMenuOpen(false); }}
             >اطلب ضيافتك</Btn>
-            <a href="https://wa.me/966539446123" target="_blank" rel="noreferrer"
+            <a href="https://wa.me/966579444843" target="_blank" rel="noreferrer"
               style={{
                 fontFamily: F.sans, fontSize: 11, fontWeight: 700,
                 letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -232,7 +232,7 @@ const Hero = ({ onBook, tone = 'ink' }) => {
           flexWrap: 'wrap',
         }}>
           <Btn kind={dark ? 'cream' : 'primary'} size={mobile ? 'md' : 'lg'} onClick={onBook}>اطلب ضيافتك</Btn>
-          <a href="https://wa.me/966539446123" target="_blank" rel="noreferrer"
+          <a href="https://wa.me/966579444843" target="_blank" rel="noreferrer"
             style={{
               fontFamily: F.sans, fontSize: 11, fontWeight: 700,
               letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -574,7 +574,7 @@ const FAQ = () => {
               lineHeight: 1.9, color: C.green, marginBottom: 32 }}>
               لم تجد إجابتك؟ راسلنا عبر واتساب وسنرد بشكل مباشر.
             </p>
-            <a href="https://wa.me/966539446123" target="_blank" rel="noreferrer"
+            <a href="https://wa.me/966579444843" target="_blank" rel="noreferrer"
               style={{ fontFamily: F.sans, fontSize: 10, fontWeight: 700,
                 letterSpacing: '0.16em', textTransform: 'uppercase',
                 color: C.burgundy, display: 'inline-flex', alignItems: 'center', gap: 8 }}
@@ -662,7 +662,7 @@ const Footer = () => {
             { l: 'الأسئلة الشائعة', id: 'faq' },
           ]},
           { title: 'تواصل', links: [
-            { l: 'واتساب', href: 'https://wa.me/966539446123' },
+            { l: 'واتساب', href: 'https://wa.me/966579444843' },
             { l: 'إنستغرام', href: 'https://www.instagram.com/thulaimcatering/' },
             { l: 'تيك توك', href: 'https://www.tiktok.com/@thulaimcatering/' },
             { l: 'الرياض، السعودية' },
@@ -717,7 +717,7 @@ const Footer = () => {
    STICKY WHATSAPP
 ══════════════════════════════ */
 const StickyWA = () => (
-  <a href="https://wa.me/966539446123" target="_blank" rel="noreferrer"
+  <a href="https://wa.me/966579444843" target="_blank" rel="noreferrer"
     style={{
       position: 'fixed', bottom: 28, right: 28, zIndex: 900,
       width: 52, height: 52, borderRadius: '50%',
